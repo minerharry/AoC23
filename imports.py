@@ -1,16 +1,18 @@
-from typing import Literal
+import functools
+from typing import TYPE_CHECKING, Callable, Literal
 from text import get_input
 from aocd.post import submit
-# from aocd.get import get_data
 from aocd.get import get_data,get_day_and_year,current_day
 from aocd.models import Puzzle,User
+
 import aocd
 from tqdm import tqdm
 import numpy as np
 from inquirer import confirm
-from IPython import embed
+from IPython import embed as iembed
 import text
-iembed = embed
+from typing import DefaultDict,Iterable,Any
+
 
 try:
     puzzle = Puzzle(2023,get_day_and_year()[0])
@@ -35,3 +37,8 @@ def submit_answer(answer,part:Literal['a','b'],puzzle=puzzle,do_confirm=True):
         puzzle.answer_a=answer
     else:
         puzzle.answer_b=answer
+
+if TYPE_CHECKING:
+    lqdm = tqdm()
+else:
+    lqdm = functools.partial(tqdm,leave=False)
