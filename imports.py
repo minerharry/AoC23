@@ -24,6 +24,8 @@ except:
 
 def get_input(puzzle:Puzzle|str=puzzle):
     if isinstance(puzzle,Puzzle):
+        with open("aocd_input.txt",'w') as f:
+            f.write(puzzle.input_data)
         return puzzle.input_data.splitlines()
     else:
         return text.get_input(puzzle)
