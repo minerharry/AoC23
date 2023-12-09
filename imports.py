@@ -1,9 +1,12 @@
+from contextlib import redirect_stdout
 import functools
+import io
+import itertools
 from typing import TYPE_CHECKING, Callable, Literal
-from text import get_input
 from aocd.post import submit
 from aocd.get import get_data,get_day_and_year,current_day
 from aocd.models import Puzzle,User
+from contextlib import nullcontext
 
 import aocd
 from tqdm import tqdm
@@ -30,17 +33,22 @@ def get_input(puzzle:Puzzle|str=puzzle):
     else:
         return text.get_input(puzzle)
 
-
+max = 18446744073709551615 ##largest number storable in C long long type
 def submit_answer(answer,part:Literal['a','b'],puzzle=puzzle,do_confirm=True):
-    if do_confirm and not confirm(f"Are you sure you want to submit answer {answer} to puzzle {puzzle}?"):
+    if do_confirm and not confirm(f"Are you sure you want to submit answer {answer} to part {part} puzzle {puzzle}?") and \
+            ((answer > max and answer > -max) or \
+            not confirm(f"Are you sure you're sure? {answer} is outside of C's normal data type range of [{-max},{max}] by {min(abs(answer - max),abs(-max-answer))}")):
         print("Answer not sent.")
-        return
+        return     
+    print("submitting answer")
     if part == 'a':
-        puzzle.answer_a=answer
+        puzzle.answer_a = answer
     else:
-        puzzle.answer_b=answer
+        puzzle.answer_b = answer
 
 if TYPE_CHECKING:
     lqdm = tqdm()
 else:
     lqdm = functools.partial(tqdm,leave=False)
+
+no_print = redirect_stdout(io.StringIO())
