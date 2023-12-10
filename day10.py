@@ -17,17 +17,17 @@ def get_path(input):
     start = (start[0],start[1])
     print(start)
 
-    starts = []
+    starts:list[tuple[tuple[int,int],str]] = []
     for dir,off in directions.items():
         print(dir,off)
         if invdir[dir] in pipes[grid[*(s := np.add(start,off))]]:
-            starts.append((s,invdir[dir]))
+            starts.append((tuple(s),invdir[dir]))
             continue
         print(s,grid[*s])
         print(invdir[dir],pipes[grid[*s]])
 
-    curr:tuple[int,int] = starts.sort(lambda k: )
-    last:str = None
+    curr:tuple[int,int] = starts[0][0]
+    last:str = starts[0][1]
 
     yield curr
     while np.any(curr != start):
@@ -57,7 +57,7 @@ def part2(input):
     g[grid != '.'] = -1 #non-ground
     pass
 
-input_data = get_input("input.txt")
+input_data = get_input()
 test_data = get_input("test.txt")
 
 part = "1"
@@ -65,7 +65,7 @@ part = "1"
 
 if part == "1":
     p = part1(input_data)
-    print(part1(test_data))
+    # print(part1(test_data))
     submit_answer(p,part='a')
 else:
     p = part2(input_data)
