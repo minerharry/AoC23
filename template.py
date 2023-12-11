@@ -19,4 +19,4 @@ if part == "1":
 else:
     p = part2(input_data)
     print(part2(test_data))
-    submit_answer(p,part='a')
+    submit_answer(p,part='b')

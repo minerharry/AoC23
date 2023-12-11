@@ -1,4 +1,7 @@
 from collections import Counter
+from _collections_abc import Container
+
+import numpy as np
 
 
 def splitlist(list,delimiter):
@@ -22,3 +25,16 @@ def mDist(p1:tuple[int,int],p2:tuple[int,int]):
 def most_frequent(l:list):
     occurence_count = Counter(l)
     return occurence_count.most_common(1)[0][0]
+
+class np_bounds(Container[tuple[int,...]]):
+    def __init__(self,arr:np.ndarray):
+        self.arr = arr
+        super().__init__()
+
+    def __contains__(self, __x: tuple[int,...]) -> bool:
+        ##this is stupid
+        try:
+            self.arr[__x]
+            return True
+        except IndexError:
+            return False

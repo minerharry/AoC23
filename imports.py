@@ -35,16 +35,18 @@ def get_input(puzzle:Puzzle|str=puzzle):
 
 max = 18446744073709551615 ##largest number storable in C long long type
 def submit_answer(answer,part:Literal['a','b'],puzzle=puzzle,do_confirm=True):
-    if do_confirm and not confirm(f"Are you sure you want to submit answer {answer} to part {part} puzzle {puzzle}?") and \
-            ((answer > max and answer > -max) or \
+    if do_confirm:
+        if not confirm(f"Are you sure you want to submit answer {answer} to part {part} puzzle {puzzle}?") or ((answer > max or answer < -max) and \
             not confirm(f"Are you sure you're sure? {answer} is outside of C's normal data type range of [{-max},{max}] by {min(abs(answer - max),abs(-max-answer))}")):
-        print("Answer not sent.")
-        return     
-    print("submitting answer")
+            print("Answer not sent.")
+            return
+        
     if part == 'a':
         puzzle.answer_a = answer
     else:
         puzzle.answer_b = answer
+    print("Answer Submitted")
+
 
 if TYPE_CHECKING:
     lqdm = tqdm()
