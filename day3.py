@@ -1,4 +1,4 @@
-# from imports import .s*
+# from _imports import .s*
 import text
 import re
 arr = text.get_input("input.txt")

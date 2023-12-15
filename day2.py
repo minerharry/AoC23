@@ -1,4 +1,4 @@
-from imports import *
+from _imports import *
 p = Puzzle(2023,2)
 input_data = get_input(puzzle=p)
 # input_data = get_input("test.txt")
@@ -16,7 +16,7 @@ for l in input_data:
         for m in o.split(", "):
             num,color = m.split(" ")
             num = int(num)
-            mins[color] = max(num,mins[color])
+            mins[color] = _maxC(num,mins[color])
             # if num > limit[color]:
             #     possible = False
             #     break

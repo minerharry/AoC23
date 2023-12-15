@@ -1,9 +1,9 @@
 from itertools import chain
 import math
-from imports import *
+from _imports import *
 from more_itertools import SequenceView, peekable, spy, value_chain
 
-from utils import np_bounds
+from utils import np_bounds, str_ndarray
 
 pipes = {'|':"NS","-":"EW","F":"ES","J":"WN","L":"NE","7":"WS",'.':""}
 sides = {'|':"EW","-":"SN","F":("","WN"),"J":("","SE"),"L":("","SW"),"7":("NE","")}
@@ -19,7 +19,7 @@ reverse_pipes = {frozenset(v):k for k,v in pipes.items()}
 
 def get_path(input):
 
-    grid = np.array([np.array(list(i)) for i in input])
+    grid = str_ndarray(input)
     bounds = grid.shape
     print(bounds)
 

@@ -1,4 +1,4 @@
-from imports import *
+from _imports import *
 input_data = get_input()#"test.txt")
 
 

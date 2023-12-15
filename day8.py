@@ -2,7 +2,7 @@ import itertools
 from math import lcm
 
 import pandas as pd
-from imports import *
+from _imports import *
 input_data = get_input()
 # input_data = get_input("test.txt")
 

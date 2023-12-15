@@ -1,4 +1,4 @@
-from imports import *
+from _imports import *
 
 def part1(input):
     def get_sequence(l:list[int]):

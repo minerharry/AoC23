@@ -1,7 +1,14 @@
+import builtins
 from collections import Counter
 from _collections_abc import Container
+import contextlib
+import inspect
+import functools
+import io
+from typing import TYPE_CHECKING
 
 import numpy as np
+from tqdm import tqdm
 
 
 def splitlist(list,delimiter):
@@ -26,6 +33,9 @@ def most_frequent(l:list):
     occurence_count = Counter(l)
     return occurence_count.most_common(1)[0][0]
 
+def str_ndarray(inp:list[str]):
+    return np.array([np.array(list(i)) for i in inp])
+
 class np_bounds(Container[tuple[int,...]]):
     def __init__(self,arr:np.ndarray):
         self.arr = arr
@@ -38,3 +48,28 @@ class np_bounds(Container[tuple[int,...]]):
             return True
         except IndexError:
             return False
+        
+@contextlib.contextmanager
+def redirect_to_tqdm():
+    # Store builtin print
+    old_print = print
+    def new_print(*args, **kwargs):
+        # If tqdm.tqdm.write raises error, use builtin print
+        try:
+            tqdm.write(*args, **kwargs)
+        except:
+            old_print(*args, ** kwargs)
+
+    try:
+        # Globaly replace print with new_print
+        builtins.print = new_print
+        yield
+    finally:
+        builtins.print = old_print
+
+if TYPE_CHECKING:
+    lqdm = tqdm()
+else:
+    lqdm = functools.partial(tqdm,leave=False)
+
+no_print = contextlib.redirect_stdout(io.StringIO())

@@ -3,7 +3,7 @@ from contextlib import redirect_stdout
 import io
 import itertools
 from typing import Iterator, Mapping
-from imports import *
+from _imports import *
 input_data = get_input()#"input.txt")
 
 seeds = list(map(int,input_data[0].split(": ")[1].split(" ")))

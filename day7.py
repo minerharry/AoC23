@@ -1,5 +1,5 @@
 from operator import indexOf, itemgetter
-from imports import *
+from _imports import *
 input_data = get_input()
 # input_data = get_input("test.txt")
 print(input_data)

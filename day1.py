@@ -1,4 +1,4 @@
-from imports import *
+from _imports import *
 p = Puzzle(2023,1)
 input_data = get_input(puzzle=Puzzle(2023,1))
 
