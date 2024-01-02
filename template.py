@@ -1,9 +1,9 @@
 from _imports import *
 
-def part1(input):
+def part1(input:list[str])->int:
     pass
 
-def part2(input):
+def part2(input:list[str])->int:
     pass
 
 if __name__ == "__main__":

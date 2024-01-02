@@ -40,7 +40,7 @@ def part2(input):
 
 if __name__ == "__main__":
     input_data = get_input()
-    test_data = get_input("test.txt")
+    test_data = get_input("ttest.txt")
 
     part = "1"
     part = "2"

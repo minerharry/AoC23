@@ -1,0 +1,11 @@
+removing: Edge(dir='U', length=3, interior=False)
+adding: Edge(dir='U', length=5, interior=False)
+
+removing: Edge(dir='L', length=2, interior=False)
+removing: Edge(dir='U', length=2, interior=True)
+
+adding: Edge(dir='R', length=4, interior=True)
+removing: Edge(dir='R', length=6, interior=True)
+
+adding: Edge(dir='D', length=5, interior=True)
+removing: Edge(dir='D', length=5, interior=True)
